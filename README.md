@@ -18,7 +18,7 @@ This is not a tutorial follow-along. Every day is two focused hours: learn a con
 | Day | Topic | Status |
 | --- | --- | --- |
 | [01](day-01/) | Hoisting, TDZ, scope | In progress |
-| 02 | Primitives, coercion, equality | |
+| [02](day-02/) | Primitives, coercion, equality | In progress |
 | 03 | Functions: declarations, expressions, arrows, HOFs | |
 | 04 | Closures | |
 | 05 | `this`, `call` / `apply` / `bind` polyfills | |
