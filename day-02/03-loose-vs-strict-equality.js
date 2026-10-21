@@ -30,13 +30,13 @@ run("A", () => {
 });
 /*
 PREDICTION:
-  A1:
-  A2:
-  A3:
-  A4:
-  A5:
-  A6:
-  A7:
+  A1: true // cause loose equality performs coersion first before comparing
+  A2: false // no type coercion
+  A3: true // cuase empty string coerces to 0 
+  A4: true
+  A5: false
+  A6: true // cause == converts false to number 0 and string "0" converts to 0
+  A7: true // cuase false gets converted to 0 and empty string gets converted to 0 as well 
 WHY:
 
 */
@@ -53,13 +53,18 @@ run("B", () => {
 });
 /*
 PREDICTION:
-  B1:
-  B2:
-  B3:
-  B4:
-  B5:
-  B6:
-  B7:
+  B1: false // null do not get converted to 0
+  B2: true   Comparison operators (<, >, <=, >=) convert both sides to numbers:
+                null >= 0
+                → Number(null) >= 0
+                → 0 >= 0
+                → true
+
+  B3: false // cause this comparision operator will convert null to 0
+  B4: false // cause null and undefined are only loosley equals to themselves
+  B5: false 
+  B6: true // cause loose equality returns truth if undefined or null are on either side 
+  B7: false // cause undefined will become NaN on converting it to number 
 WHY:
 
 */
@@ -76,14 +81,26 @@ run("C", () => {
 });
 /*
 PREDICTION:
-  C1:
-  C2:
-  C3:
-  C4:
-  C5:
-  C6:
-  C7:
-WHY:
+  C1: true // cause empty array gets converted "" and this gets converted to 0 and false also gets converted to 0 
+  C2: true // arrays are objects and all objects are truthy in js , so the chain is 
+   [] == ![] -->   "" == !true   -->   0 == false   -->   0 == 0    --> true  
+  C3: true // array gets converted to primitive so "0" == false   -->   0 == 0   -->  true 
+  C4: true
+  C5: true // the left array gets converted to primitive which is to string 
+  C6: true // cause an empty string evaluates to "[object, object]"
+  C7: true // When JavaScript needs to compare an object with a primitive using ==, it generally needs to convert the object into a primitive value.
+  For an ordinary Array, its default primitive conversion ends up using its toString() behavior.
+  arrays stringify their elements using a comma-separated representation:
+    [1, 2, 3].toString()
+    // "1,2,3"
+
+    [1].toString()
+    // "1"
+
+    [null].toString()
+    // ""
+
+    [undefined].toString()
 
 */
 
@@ -98,10 +115,10 @@ run("D", () => {
 });
 /*
 PREDICTION:
-  D1:
-  D2:
-  D3:
-  D4:
+  D1: false // since both sides are objects so there is no coercion happens there and comparision between two objects and they are compared via identity not by content.
+  D2: false // cause both the objects are different , this is called object identity concept. 
+  D3: true  // cause both points towards the same array
+  D4: false  // cause it is being compared using tripple equals so it will be false even though the contents of array are same.
 WHY:
 
 */
@@ -114,9 +131,9 @@ run("E", () => {
 });
 /*
 PREDICTION:
-  E1:
-  E2:
-  E3:
+  E1: true // cause string one will get converted to 1 and true will get converted to 1
+  E2: false // cause left true will get converted to number which will be 1 but converting string true to a number will result in NaN thus comparision is falls
+  E3: false // cause boolean gets converted to number which will be 1 , and it won't be equals to LHS
 WHY:
 
 */

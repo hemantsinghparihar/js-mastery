@@ -37,16 +37,16 @@ run("A", () => {
 });
 /*
 PREDICTION:
-  A1:
-  A2:
-  A3:
-  A4:
-  A5:
-  A6:
-  A7:
-  A8:
-  A9:
-  A10:
+  A1: 12 // cause one operand is string so js. coerce number to string and concatinate it 
+  A2: 2 // string 3 will get converted to number 3 and the final will be 2
+  A3: 12 // cause both sides will get converted to numbers and then multiplied
+  A4: 2 // true will be converted to number which is 1
+  A5: 5null // cause null gets converted to string and then they get concatinated
+  A6: 0 // converting an empty string into number results to 0
+  A7: 42 // unary + operator converts the string to number
+  A8: NaN // the gap between 4 and 2 makes it not a number
+  A9: "33" // the evaluation happens left to right, first 1 + 2 = 3 and then 3 + "3" = "33" 
+  A10: "123" // cause the initial data type is string so the later number coerces to string and gets concatinated.
 WHY:
 
 */
@@ -64,14 +64,14 @@ run("B", () => {
 });
 /*
 PREDICTION:
-  B1:
-  B2:
-  B3:
-  B4:
-  B5:
-  B6:
-  B7:
-  B8:
+  B1: "" // it gets converted to empty string
+  B2: "" + "[object,object]" -> "[object,object]"
+  B3: "[object Object]"
+  B4: "1, 2" + "3" -> "1,23"
+  B5: "1"
+  B6: 6
+  B7: -1
+  B8: NaN
 WHY:
 
 */
@@ -94,39 +94,16 @@ run("C", () => {
 });
 /*
 PREDICTION:
-  C1:
-  C2:
-  C3:
-  C4:
-  C5:
+  C1: 43 // the plus operator directly can not add an object to a primitive value so to convert the object to primitive value an object first calls its valueOf() method and then further based on the needs it might call toString() operator.
+  C2:str // obj the object is inside the string template literals which explicitly tries to convert obj to string -> String(obj) which calls toString method of object
+  C3:"42" // first oject will be simply converted to primitive and for that valueOf() will be used and later for concatination it will be a string.
+  C4: str // cause it explicitly calls toString
+  C5: 84 // calls valueOf().
 WHY:
 
 */
 
-// ---------- Snippet D ----------
-// Each line first logs the hint it receives, THEN show() prints the result.
-// Predict both: the hint ("number" / "string" / "default") and the result.
-run("D", () => {
-  const t = {
-    [Symbol.toPrimitive](hint) {
-      console.log("  hint:", hint);
-      if (hint === "number") return 10;
-      if (hint === "string") return "ten";
-      return "default!";
-    },
-  };
-  show("D1:", +t);
-  show("D2:", `${t}`);
-  show("D3:", t + "");
-});
-/*
-PREDICTION:
-  hint:       D1:
-  hint:       D2:
-  hint:       D3:
-WHY:
 
-*/
 
 // ---------- Snippet E ----------
 run("E", () => {
@@ -135,25 +112,13 @@ run("E", () => {
 });
 /*
 PREDICTION:
-  E1:
-  E2:
+  E1: "Jan 1 1970 0" -> STRING // new date(0) - returns the date of jan 1 1970 cause it is the standard starting time mutually agreed based on the unix developmenyt in 1970
+  E2: 0 -> NUMBER // cause the - operator will need the object to be a number , and valueOf Date(0) returns 0.
 WHY:
 
 */
 
-// ---------- Snippet F ----------
-// eval runs the string as a statement, the same way a REPL line does.
-run("F", () => {
-  show("F1:", eval("{} + []"));
-  show("F2:", eval("({} + [])"));
-});
-/*
-PREDICTION:
-  F1:
-  F2:
-WHY:
 
-*/
 
 // ---------- Think about ----------
 // B2 and F1 look like the same expression but give different results.
