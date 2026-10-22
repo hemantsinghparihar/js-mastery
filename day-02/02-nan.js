@@ -76,7 +76,7 @@ run("C", () => {
 PREDICTION:
   C1: NaN
   C2: NaN
-  C3: 12
+  C3: 12 
   C4: NaN
   C5: NaN
   C6: 1 // cause the + operator converts null to 0.

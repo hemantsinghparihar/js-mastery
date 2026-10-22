@@ -64,7 +64,7 @@ run("B", () => {
 });
 /*
 PREDICTION:
-  B1: "" // it gets converted to empty string
+  B1: "" // it gets converted to empty string cause for airthematic operation these both sides needs to be primitive , so toPrimitive algo is triggered, first by default it calls valueOf() which returns [] which still is an object so then it tries toString() which returns "" 
   B2: "" + "[object,object]" -> "[object,object]"
   B3: "[object Object]"
   B4: "1, 2" + "3" -> "1,23"

@@ -18,28 +18,18 @@ function show(label, value) {
 
 // ================= Round 1 =================
 
-run("1", () => show("1:", undefined /* replace with your expression */));
-run("2", () => show("2:", undefined));
-run("3", () => show("3:", undefined));
-run("4", () => show("4:", undefined));
-run("5", () => show("5:", undefined));
-run("6", () => show("6:", undefined));
-run("7", () => show("7:", undefined));
-run("8", () => show("8:", undefined));
-run("9", () => show("9:", undefined));
-run("10", () => show("10:", undefined));
+run("1", () => show("1:", parseInt("12px") /* replace with your expression */));
+run("2", () => show("2:", undefined + 1));
+run("3", () => show("3:", NaN !== NaN));
+run("4", () => show("4:", [] + []));
+
 /*
 PREDICTION:
-  1:
-  2:
-  3:
-  4:
-  5:
-  6:
-  7:
-  8:
-  9:
-  10:
+  1: 12 // cause parse it cuts off other things then the number
+  2: NaN // cause undefined represents a state of being uninitialized or non-existent
+  3: true // cause NaN is not equals to anything while compared, even when compared to itself.
+  4:  ""
+
 
 ACTUAL:
 

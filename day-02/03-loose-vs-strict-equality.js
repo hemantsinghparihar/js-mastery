@@ -32,11 +32,11 @@ run("A", () => {
 PREDICTION:
   A1: true // cause loose equality performs coersion first before comparing
   A2: false // no type coercion
-  A3: true // cuase empty string coerces to 0 
+  A3: true // cause empty string coerces to 0 
   A4: true
   A5: false
   A6: true // cause == converts false to number 0 and string "0" converts to 0
-  A7: true // cuase false gets converted to 0 and empty string gets converted to 0 as well 
+  A7: true // cause false gets converted to 0 and empty string gets converted to 0 as well 
 WHY:
 
 */
